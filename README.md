@@ -12,7 +12,7 @@ python -m pip install -r requirements.txt
 
 # Usage
 ```bash
-python3 imagecationer/imagecationer.py --wotd -o output.png test/mona_lisa.png
+python3 imagecationer/imagecationer.py --wotd -o output.png imagecaptioner/test/mona_lisa.png
 ```
 
 
