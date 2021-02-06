@@ -8,7 +8,8 @@ import time
 parser = argparse.ArgumentParser(description='Caption an image with some text.')
 parser.add_argument('filename', help='input image to caption', )
 parser.add_argument('-o', '--output', help='output filename')
-parser.add_argument('--font-color', help='hexcode for font color', default='#000000')
+parser.add_argument('--color', help='font color', default='#000000')
+parser.add_argument('--best-fit', help='adjust the size of the font so as to best fill the size of the image', action='store_true')
 caption_group = parser.add_mutually_exclusive_group(required=True)
 caption_group.add_argument('--wotd', help='use the MW wotd as the caption', action='store_true')
 caption_group.add_argument('-c', '--caption', help='text to use as the caption')
@@ -20,9 +21,9 @@ args = parser.parse_args()
 
 caption = str(Wotd().wotd()) if args.wotd else args.caption
 output = args.output if args.output else f'{int(time.time())}_{args.filename}'
+best_fit = args.best_fit or args.wotd
 
-
-captioner = Captioner(args.font_color, args.gravity)
+captioner = Captioner(args.color, args.gravity, best_fit)
 captioner.caption(args.filename, output, caption)
 print(f'captioned image written to {output}')
 
